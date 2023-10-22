@@ -121,6 +121,22 @@ class Arbol:
     
     def set_hijoLeft(self, hijoLeft):
         self.hijoLeft = hijoLeft
+    
+    def data(self):
+
+        datos = [
+        self.padre ,
+        self.coordenadas,
+        self.valorReal,
+        self.ValorAcumulado ,
+        self.valorHijoMenorAcumulado,
+        self.hijoUp ,
+        self.hijoRight,
+        self.hijoBottom ,
+        self.hijoLeft
+        ]
+
+        return datos
 
 
     
