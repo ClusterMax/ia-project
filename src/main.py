@@ -15,4 +15,4 @@ tablero = [[1,1,3,1,1,1,1,1],
 
 algoritmo = cur.AlgoritmoCURecursivo(tablero=tablero)
 
-algoritmo.costoUniformeRecursivo()
+print(algoritmo.costoUniformeRecursivo())

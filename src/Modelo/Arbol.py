@@ -8,7 +8,7 @@
 
 class Arbol:
     
-    def __init__(self, padre=None, coordenadas=[], valorReal=None, ValorAcumulado=None, valorHijoMenorAcumulado=None, hijoUp=None, hijoRight=None, hijoBottom=None, hijoLeft=None):
+    def __init__(self, padre=None, coordenadas=[], valorReal=None, ValorAcumulado=None, valorHijoMenorAcumulado=None, hijoUp=None, hijoRight=None, hijoBottom=None, hijoLeft=None, tipo="vacio"):
         self.padre = padre
         self.coordenadas = coordenadas
         self.valorReal = valorReal
@@ -18,6 +18,7 @@ class Arbol:
         self.hijoRight = hijoRight
         self.hijoBottom = hijoBottom
         self.hijoLeft = hijoLeft
+        self.tipo = tipo
     
     def __eq__(self, other):
 
@@ -121,6 +122,12 @@ class Arbol:
     
     def set_hijoLeft(self, hijoLeft):
         self.hijoLeft = hijoLeft
+
+    def get_tipo(self):
+        return self.tipo
+    
+    def set_tipo(self, tipo):
+        self.tipo = tipo
     
     def data(self):
 

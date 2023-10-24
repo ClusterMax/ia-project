@@ -16,8 +16,15 @@ class AlgoritmoCURecursivo:
         self.tablero = tablero
         self.puntoInicial = puntoInicial
         self.PuntoFinal = puntoFinal
-          
 
+    def tipoNodo(self, valorReal):
+
+        if valorReal == 1:
+            return "vacio"
+        elif valorReal == 3:
+            return "gato"
+        elif valorReal == -2:
+            return "amo"
 
     def expandirNodos(self, nodoActual=None, nodosExtendidosGlobal=[]):
 
@@ -29,7 +36,7 @@ class AlgoritmoCURecursivo:
             ##Si esta en los limites de arriba
             if posicion[0] != 0:#como el siguiente nodo  esta en el limite del tablero
                 # no lo podemos crear, por ende tenemos que añadirlo a la lista y decir que tiene un valor de infinito positivo
-                print("calcula el de arriba")
+                #print("calcula el de arriba")
                 posicionSiguiente = [posicion[0]-1, posicion[1]]
 
                 if nodoActual.get_padre() is None or nodoActual.get_padre().get_coordenadas() != posicionSiguiente:
@@ -37,7 +44,9 @@ class AlgoritmoCURecursivo:
                     valorReal = self.tablero[posicionSiguiente[0]][posicionSiguiente[1]]
                     if valorReal != 0: #quiere decir que en esa casilla hay un muro, por ende no puede ir hacia allá
                         ValorAcumulado = nodoActual.get_ValorAcumulado() + valorReal
-                        nodoArriba = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0)
+                        tipo = (self.tipoNodo(valorReal=valorReal))
+                        #print(posicionSiguiente)
+                        nodoArriba = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0, tipo=tipo)
 
                         #guardamos en la lista de nodos extendidos, en la extendidos global y añadimos al hijo izquierdo del arbol principal
                         
@@ -50,14 +59,15 @@ class AlgoritmoCURecursivo:
         
             if posicion[1] != 7: #se encuenta en el limite de la derecha
                 
-                print("calcula el de ¿derecha")
+                #print("calcula el de ¿derecha")
                 posicionSiguiente = [posicion[0], posicion[1]+1]
                 if nodoActual.get_padre() is None or nodoActual.get_padre().get_coordenadas() != posicionSiguiente:
                     valorReal = self.tablero[posicionSiguiente[0]][posicionSiguiente[1]]
                     if valorReal != 0: #quiere decir que en esa casilla hay un muro, por ende no puede ir hacia allá
 
                         ValorAcumulado = nodoActual.get_ValorAcumulado() + valorReal
-                        nodoDerecha = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0)
+                        tipo = (self.tipoNodo(valorReal=valorReal))
+                        nodoDerecha = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0, tipo=tipo)
 
                         #añadimos al hijo derecho del arbol principal, luego añadimos el hijo que se añadio, para tener una instancia de ese mismo objeto
                         
@@ -67,14 +77,15 @@ class AlgoritmoCURecursivo:
             
             if posicion[0] != 4: #se encuenta en el limite de abajo
                 
-                    print("calcula el de abajo")
+                    #print("calcula el de abajo")
                     posicionSiguiente = [posicion[0]+1, posicion[1]]
                     if nodoActual.get_padre() is None or nodoActual.get_padre().get_coordenadas() != posicionSiguiente:
                         valorReal = self.tablero[posicionSiguiente[0]][posicionSiguiente[1]]
                         if valorReal != 0: #quiere decir que en esa casilla hay un muro, por ende no puede ir hacia allá
 
                             ValorAcumulado = nodoActual.get_ValorAcumulado() + valorReal
-                            nodoAbajo = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0)
+                            tipo = (self.tipoNodo(valorReal=valorReal))
+                            nodoAbajo = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0, tipo=tipo)
 
                             #guardamos en la lista de nodos extendidos, en la extendidos global y añadimos al hijo izquierdo del arbol principal
                             
@@ -84,14 +95,15 @@ class AlgoritmoCURecursivo:
             
             if posicion[1] != 0: #se encuenta en el limite de la izquierda
 
-                    print("calcula el de izquierda")
+                    #print("calcula el de izquierda")
                     posicionSiguiente = [posicion[0], posicion[1]-1]
                     if nodoActual.get_padre() is None or nodoActual.get_padre().get_coordenadas() != posicionSiguiente:
                         valorReal = self.tablero[posicionSiguiente[0]][posicionSiguiente[1]]
                         if valorReal != 0: #quiere decir que en esa casilla hay un muro, por ende no puede ir hacia allá
 
                             ValorAcumulado = nodoActual.get_ValorAcumulado() + valorReal
-                            nodoIzquierda = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0)
+                            tipo = (self.tipoNodo(valorReal=valorReal))
+                            nodoIzquierda = A.Arbol(padre=nodoActual,coordenadas=posicionSiguiente, valorReal=valorReal, ValorAcumulado=ValorAcumulado, valorHijoMenorAcumulado=0, tipo=tipo)
 
                             #guardamos en la lista de nodos extendidos, en la extendidos global y añadimos al hijo izquierdo del arbol principal
                             
@@ -122,11 +134,11 @@ class AlgoritmoCURecursivo:
         #for i in range(20):
 
             if nodoActual.get_valorHijoMenorAcumulado() == 0:
-                print("nodo actual en el que estamos".center(50,"-"))
-                print(nodoActual)
+                #print("nodo actual en el que estamos".center(50,"-"))
+                #print(nodoActual)
                 nodoActual,nodosExtendidosPorNodo = self.expandirNodos(nodoActual=nodoActual, nodosExtendidosGlobal=nodosExtendidosGlobal)
             else:
-                print("estas re-expandiendo un nodo que ya se expandio, pero tranqui aqui le solucionamos los hijos jsjs")
+                #print("estas re-expandiendo un nodo que ya se expandio, pero tranqui aqui le solucionamos los hijos jsjs")
                 nodoActual.set_valorHijoMenorAcumulado(0) # Como haremos el mismo proceso de expansión, establecemos el valor del hijo a 0.
                 # Al parecer, tendremos que independizar el método de expansión, 
                 # ya que para poder volver a expandirlo, necesitamos tener los hijos y saber cuál es el mínimo para expandirlo.
@@ -134,7 +146,7 @@ class AlgoritmoCURecursivo:
                 contadorReExpancion += 1
 
                 nodoDobleExpancion, nodosExtendidosPorNodo= self.expandirNodos(nodoActual= nodoActual, nodosExtendidosGlobal=nodosExtendidosGlobal)
-                print("el nodo elejido para hacer la doble expancion fue : {}".format(nodoDobleExpancion))
+                #print("el nodo elejido para hacer la doble expancion fue : {}".format(nodoDobleExpancion))
 
                 nodoElejido = min(nodosExtendidosPorNodo)
 
@@ -144,23 +156,23 @@ class AlgoritmoCURecursivo:
 
                 nodoActual = nodoDobleExpancionFinal
 
-                print("el nodo actual es: {}".format(nodoActual))
+                #print("el nodo actual es: {}".format(nodoActual))
             #print(nodosExtendidosGlobal)
             
 
                 
             #Evaluamos la listaNodosExtendidos global, y preguntamos cual tiene el menor valor acumulado (nodo siguiente para avanzar)
 
-            print("imprimimos la lista de nodos extendidos globales")
-            for nodo in nodosExtendidosGlobal:
-                print(nodo)
+            #print("imprimimos la lista de nodos extendidos globales")
+            #for nodo in nodosExtendidosGlobal:
+                #print(nodo)
             #print(nodoElejido)
 
             nodoElejido = min(nodosExtendidosGlobal) #se elije el nodo menor de la lista de expandidos globales, independientmente si ya fue comprimido o no
 
             if nodoElejido not in nodosExtendidosPorNodo:
                 #si no es un nodo que acabamos de expandir, quiere decir que se cambio de rama, en esta parte del codigo es donde se comprime la rama
-                print("se cambio de rama, iniciando proceso de compresion")
+                #print("se cambio de rama, iniciando proceso de compresion")
                 hijoMenor = min(nodosExtendidosPorNodo)
                     
                 nodoActual.set_valorHijoMenorAcumulado(hijoMenor.get_ValorAcumulado()) #añadimos el valor del hijo menor acumulado a la variable correspondinete en el padre,
@@ -168,37 +180,37 @@ class AlgoritmoCURecursivo:
                 #ahora debemos de eliminar los hijos de ese nodo, todos los hijos ademas de removerlos de nodosEstendisosGlobal
 
 
-                print("SONA DE ELIMINACION".center(50,"-"))
+                #print("SONA DE ELIMINACION".center(50,"-"))
 
-                print(nodoActual.get_hijoUp())
-                print(nodoActual.get_hijoRight())
-                print(nodoActual.get_hijoBottom())
-                print(nodoActual.get_hijoLeft())
-                print("".center(50,"-"))
+                #print(nodoActual.get_hijoUp())
+                #print(nodoActual.get_hijoRight())
+                #print(nodoActual.get_hijoBottom())
+                #print(nodoActual.get_hijoLeft())
+                #print("".center(50,"-"))
 
 
                 if nodoActual.get_hijoUp() is not None:
-                    print("entra aqui en el de arrriba")
+                    #print("entra aqui en el de arrriba")
 
                     nodosExtendidosGlobal.remove(nodoActual.get_hijoUp())
                 
                 if nodoActual.get_hijoRight() is not None:
-                    print("entra aqui en el de derecha")
+                    #print("entra aqui en el de derecha")
                     nodosExtendidosGlobal.remove(nodoActual.get_hijoRight())
                 
                 if nodoActual.get_hijoBottom() is not None:
-                    print("entra aqui en el de abajo")
+                    #print("entra aqui en el de abajo")
                     nodosExtendidosGlobal.remove(nodoActual.get_hijoBottom())
 
                 if nodoActual.get_hijoLeft() is not None:
-                    print("entra aqui en el hp problema :)")
+                    #print("entra aqui en el hp problema :)")
 
                     nodosExtendidosGlobal.remove(nodoActual.get_hijoLeft())
                 
-                print("al momento de elimar los hijos, la lista expandidos global queda asi.".center(90,"-"))
+                #print("al momento de elimar los hijos, la lista expandidos global queda asi.".center(90,"-"))
 
-                for nodo in nodosExtendidosGlobal:
-                    print(nodo)
+                #for nodo in nodosExtendidosGlobal:
+                    #print(nodo)
 
                 #de esta forma eliminamos de la estructura los hijos que acabamos de crear y comprimimos la rama
                 nodoActual.set_hijoUp(None)
@@ -209,30 +221,35 @@ class AlgoritmoCURecursivo:
 
 
                 nodosExtendidosGlobal.append(nodoActual)
-                print("añadimos a la lista el siguiente nodo: {}".format(nodoActual))
+                #print("añadimos a la lista el siguiente nodo: {}".format(nodoActual))
 
     
-            else: 
-                print("se escogio un nodo de la misma rama, es decir del nodo que acabamos de expandir.")
+            #else: 
+                #print("se escogio un nodo de la misma rama, es decir del nodo que acabamos de expandir.")
             
-            print("nodo elejido: {}".format(nodoElejido))        
+            #print("nodo elejido: {}".format(nodoElejido))        
             nodosExtendidosGlobal.remove(nodoElejido)
 
             nodoActual = nodoElejido #nos dirijimos al nodo seleccionado
-                
+
+
+        nodoActual.set_tipo("meta")      
 
 
         listaCamino =[]
 
-        print("camino calculado hasta ahora")
+        #print("camino calculado hasta ahora")
         while nodoActual.get_padre() is not None:
             
-            listaCamino.append([nodoActual.get_coordenadas(), nodoActual.get_ValorAcumulado()])
+            listaCamino.append([nodoActual.get_coordenadas(), nodoActual.get_tipo(), nodoActual.get_ValorAcumulado()])
 
             #print(nodoActual)
 
             nodoActual = nodoActual.get_padre()
         
-        print(listaCamino[::-1])
-        print("la cantidad de nodos comprimidos son de: {}".format(contadorComprimidos))
-        print("la cantidad de nodos re-expandidos son de: {}".format(contadorReExpancion))
+        listaCamino = listaCamino[::-1]
+        #print(listaCamino[::-1])
+        #print("la cantidad de nodos comprimidos son de: {}".format(contadorComprimidos))
+        #print("la cantidad de nodos re-expandidos son de: {}".format(contadorReExpancion))
+
+        return listaCamino
