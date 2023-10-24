@@ -1,4 +1,4 @@
-import Modelo.Arbol as A
+import src.Modelo.Arbol as A
 import math 
 
 # Inicio del personaje en la casilla [2,7]
