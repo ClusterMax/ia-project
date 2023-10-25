@@ -1,0 +1,8 @@
+# Ignorar todos los directorios __pycache__
+__pycache__/
+
+# Ignorar el directorio env (ambiente virtual de Python)
+env/
+
+# Ignorar el directorio .idea (archivos de configuración de PyCharm)
+.idea/
