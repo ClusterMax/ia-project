@@ -64,29 +64,32 @@ def test__eq__(arbol1, arbol2, expected):
     [
     ]
 )
-def test__eq__():
+def test__gt__():
     pass
+
 
 @pytest.mark.parametrize(
     "",
     [
     ]
 )
-def test__eq__():
+def test__ge__():
     pass
+
 
 @pytest.mark.parametrize(
     "",
     [
     ]
 )
-def test__eq__():
+def test__lt__():
     pass
+
 
 @pytest.mark.parametrize(
     "",
     [
     ]
 )
-def test__eq__():
+def test__le__():
     pass
