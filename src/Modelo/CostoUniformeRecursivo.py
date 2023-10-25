@@ -34,7 +34,7 @@ class AlgoritmoCURecursivo:
 
             ##Expandimos el nodo de arriba
             ##Si esta en los limites de arriba
-            if posicion[0] != 0:#como el siguiente nodo  esta en el limite del tablero
+            if posicion[0] != 0:#como el siguiente nodo  esta en el limite del tablero arriba
                 # no lo podemos crear, por ende tenemos que añadirlo a la lista y decir que tiene un valor de infinito positivo
                 #print("calcula el de arriba")
                 posicionSiguiente = [posicion[0]-1, posicion[1]]
@@ -57,7 +57,10 @@ class AlgoritmoCURecursivo:
             #si esta en los limites de la derecha
 
         
-            if posicion[1] != 7: #se encuenta en el limite de la derecha
+            if posicion[1] != len(self.tablero[0])-1: #se encuenta en el limite de la derecha
+
+                #print("calcula derecha")
+                #print(posicion[1],len(self.tablero[0])-1)
                 
                 #print("calcula el de ¿derecha")
                 posicionSiguiente = [posicion[0], posicion[1]+1]
@@ -75,7 +78,10 @@ class AlgoritmoCURecursivo:
                         nodosExtendidosPorNodo.append(nodoActual.get_hijoRight())
                         nodosExtendidosGlobal.append(nodoActual.get_hijoRight())
             
-            if posicion[0] != 4: #se encuenta en el limite de abajo
+            if posicion[0] != len(self.tablero)-1: #se encuenta en el limite de abajo
+                    
+                    #print("calcula abajo")
+                    #print(posicion[1],len(self.tablero)-1)
                 
                     #print("calcula el de abajo")
                     posicionSiguiente = [posicion[0]+1, posicion[1]]
@@ -170,58 +176,60 @@ class AlgoritmoCURecursivo:
 
             nodoElejido = min(nodosExtendidosGlobal) #se elije el nodo menor de la lista de expandidos globales, independientmente si ya fue comprimido o no
 
-            if nodoElejido not in nodosExtendidosPorNodo:
-                #si no es un nodo que acabamos de expandir, quiere decir que se cambio de rama, en esta parte del codigo es donde se comprime la rama
-                #print("se cambio de rama, iniciando proceso de compresion")
-                hijoMenor = min(nodosExtendidosPorNodo)
+            if len(nodosExtendidosPorNodo) > 0:
+
+                if nodoElejido not in nodosExtendidosPorNodo:
+                    #si no es un nodo que acabamos de expandir, quiere decir que se cambio de rama, en esta parte del codigo es donde se comprime la rama
+                    #print("se cambio de rama, iniciando proceso de compresion")
+                    hijoMenor = min(nodosExtendidosPorNodo)
+                        
+                    nodoActual.set_valorHijoMenorAcumulado(hijoMenor.get_ValorAcumulado()) #añadimos el valor del hijo menor acumulado a la variable correspondinete en el padre,
+
+                    #ahora debemos de eliminar los hijos de ese nodo, todos los hijos ademas de removerlos de nodosEstendisosGlobal
+
+
+                    #print("SONA DE ELIMINACION".center(50,"-"))
+
+                    #print(nodoActual.get_hijoUp())
+                    #print(nodoActual.get_hijoRight())
+                    #print(nodoActual.get_hijoBottom())
+                    #print(nodoActual.get_hijoLeft())
+                    #print("".center(50,"-"))
+
+
+                    if nodoActual.get_hijoUp() is not None:
+                        #print("entra aqui en el de arrriba")
+
+                        nodosExtendidosGlobal.remove(nodoActual.get_hijoUp())
                     
-                nodoActual.set_valorHijoMenorAcumulado(hijoMenor.get_ValorAcumulado()) #añadimos el valor del hijo menor acumulado a la variable correspondinete en el padre,
+                    if nodoActual.get_hijoRight() is not None:
+                        #print("entra aqui en el de derecha")
+                        nodosExtendidosGlobal.remove(nodoActual.get_hijoRight())
+                    
+                    if nodoActual.get_hijoBottom() is not None:
+                        #print("entra aqui en el de abajo")
+                        nodosExtendidosGlobal.remove(nodoActual.get_hijoBottom())
 
-                #ahora debemos de eliminar los hijos de ese nodo, todos los hijos ademas de removerlos de nodosEstendisosGlobal
+                    if nodoActual.get_hijoLeft() is not None:
+                        #print("entra aqui en el hp problema :)")
 
+                        nodosExtendidosGlobal.remove(nodoActual.get_hijoLeft())
+                    
+                    #print("al momento de elimar los hijos, la lista expandidos global queda asi.".center(90,"-"))
 
-                #print("SONA DE ELIMINACION".center(50,"-"))
+                    #for nodo in nodosExtendidosGlobal:
+                        #print(nodo)
 
-                #print(nodoActual.get_hijoUp())
-                #print(nodoActual.get_hijoRight())
-                #print(nodoActual.get_hijoBottom())
-                #print(nodoActual.get_hijoLeft())
-                #print("".center(50,"-"))
-
-
-                if nodoActual.get_hijoUp() is not None:
-                    #print("entra aqui en el de arrriba")
-
-                    nodosExtendidosGlobal.remove(nodoActual.get_hijoUp())
-                
-                if nodoActual.get_hijoRight() is not None:
-                    #print("entra aqui en el de derecha")
-                    nodosExtendidosGlobal.remove(nodoActual.get_hijoRight())
-                
-                if nodoActual.get_hijoBottom() is not None:
-                    #print("entra aqui en el de abajo")
-                    nodosExtendidosGlobal.remove(nodoActual.get_hijoBottom())
-
-                if nodoActual.get_hijoLeft() is not None:
-                    #print("entra aqui en el hp problema :)")
-
-                    nodosExtendidosGlobal.remove(nodoActual.get_hijoLeft())
-                
-                #print("al momento de elimar los hijos, la lista expandidos global queda asi.".center(90,"-"))
-
-                #for nodo in nodosExtendidosGlobal:
-                    #print(nodo)
-
-                #de esta forma eliminamos de la estructura los hijos que acabamos de crear y comprimimos la rama
-                nodoActual.set_hijoUp(None)
-                nodoActual.set_hijoRight(None)
-                nodoActual.set_hijoBottom(None)
-                nodoActual.set_hijoLeft(None)
-                contadorComprimidos +=1
+                    #de esta forma eliminamos de la estructura los hijos que acabamos de crear y comprimimos la rama
+                    nodoActual.set_hijoUp(None)
+                    nodoActual.set_hijoRight(None)
+                    nodoActual.set_hijoBottom(None)
+                    nodoActual.set_hijoLeft(None)
+                    contadorComprimidos +=1
 
 
-                nodosExtendidosGlobal.append(nodoActual)
-                #print("añadimos a la lista el siguiente nodo: {}".format(nodoActual))
+                    nodosExtendidosGlobal.append(nodoActual)
+                    #print("añadimos a la lista el siguiente nodo: {}".format(nodoActual))
 
     
             #else: 

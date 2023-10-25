@@ -14,7 +14,7 @@ tablero = [[1,1,3,1,1,1,1,1],
            [1,-2,1,3,1,1,1,1]]
 
 
-# Define la matriz del tablero
+# matriz para graficar
 tablero2 = [[1, 1, 3, 1, 1, 1, 1, 1],
            [1, 2, 0, 0, 2, 0, 0, 1],
            [4, 0, 1, 1, 1, 0, 0, -1],
@@ -22,7 +22,7 @@ tablero2 = [[1, 1, 3, 1, 1, 1, 1, 1],
            [1, 2, 1, 3, 1, 1, 1, 1]]
 
 
-algoritmo = cur.AlgoritmoCURecursivo(tablero=tablero)
+algoritmo = cur.AlgoritmoCURecursivo(tablero=tablero, puntoInicial = [2,7], puntoFinal = [2,0])
 
 print(algoritmo.costoUniformeRecursivo())
 

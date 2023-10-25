@@ -25,7 +25,15 @@ class Arbol:
     #Metodo del operador == par apoder comprarar objetos de la misma clase
     def __eq__(self, other):
 
-        return self.coordenadas == other.coordenadas and self.padre == other.padre and self.ValorAcumulado == other.valorAcumulado
+        if self is None and other is None:
+            return True
+        
+        elif self is None and other is not None:
+            return False
+        elif self is not None and other is None:
+            return False
+        else:
+            return self.coordenadas == other.coordenadas and self.padre == other.padre and self.ValorAcumulado == other.valorAcumulado
     
     #Metodo del operador > par apoder comprarar objetos de la misma clase
     def __gt__(self, other):

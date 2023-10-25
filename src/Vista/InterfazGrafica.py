@@ -4,7 +4,7 @@ import os
 
 
 # Directorio de assets
-asset_dir = "assets"
+asset_dir = "src\\assets"
 
 class tablero:
 
@@ -95,7 +95,7 @@ class tablero:
 
         # Botón de jugar
         playButton = tk.Button(main_frame, text="Jugar", foreground="green", width=20, height=5, command=lambda: self.iniciar_juego(main_frame=main_frame, game_frame=game_frame))
-        exitButton = tk.Button(main_frame, text="Salir", foreground="red", width=20, height=5, command=quit)
+        exitButton = tk.Button(main_frame, text="Salir", foreground="red", width=20, height=5, command= quit)
 
         # Posición de botones en el panel principal
         playButton.pack()
