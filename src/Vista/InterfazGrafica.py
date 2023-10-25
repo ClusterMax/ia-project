@@ -2,100 +2,104 @@ import tkinter as tk
 import pygame
 import os
 
-# Define la matriz del tablero
-tablero = [[1, 1, 3, 1, 1, 1, 1, 1],
-           [1, 2, 0, 0, 2, 0, 0, 1],
-           [4, 0, 1, 1, 1, 0, 0, -1],
-           [1, 0, 1, 0, 0, 0, 1, 1],
-           [1, 2, 1, 3, 1, 1, 1, 1]]
 
 # Directorio de assets
 asset_dir = "assets"
 
+class tablero:
 
-# Función para cargar imágenes según el código y escalarlas al tamaño de la casilla
-def cargar_imagen(codigo, cell_width, cell_height):
-    image = pygame.image.load(os.path.join(asset_dir, f"{codigo}.png"))
-    return pygame.transform.scale(image, (cell_width, cell_height))
+    def __init__(self, tablero, posJugador=[2,7], posMeta=[2,0]):
 
-# Función que se ejecuta cuando se hace clic en el botón "Jugar"
-# Función que se ejecuta cuando se hace clic en el botón "Jugar"
-def iniciar_juego():
-    # Oculta el panel principal
-    main_frame.pack_forget()
+        self.tablero = tablero
+        self.posJugador = posJugador
+        self.posMeta = posMeta
+        
 
-    # Crea un nuevo frame para el juego
-    game_frame.pack()
+    # Función para cargar imágenes según el código y escalarlas al tamaño de la casilla
+    def cargar_imagen(self, codigo, cell_width, cell_height):
+        image = pygame.image.load(os.path.join(asset_dir, f"{codigo}.png"))
+        return pygame.transform.scale(image, (cell_width, cell_height))
 
-    # Inicializa Pygame
-    pygame.init()
+    # Función que se ejecuta cuando se hace clic en el botón "Jugar"
+    # Función que se ejecuta cuando se hace clic en el botón "Jugar"
+    def iniciar_juego(self, main_frame, game_frame):
+        # Oculta el panel principal
+        main_frame.pack_forget()
 
-    # Configura el tamaño del grid (i y j)
-    i = len(tablero)
-    j = len(tablero[0])
+        # Crea un nuevo frame para el juego
+        game_frame.pack()
 
-    # Calcula el tamaño de cada celda del grid
-    cell_width = 800 // j
-    cell_height = 600 // i
+        # Inicializa Pygame
+        pygame.init()
 
-    # Crea una ventana de Pygame en el panel
-    screen = pygame.display.set_mode((800, 600))
+        # Configura el tamaño del grid (i y j)
+        i = len(self.tablero)
+        j = len(self.tablero[0])
 
-    # Color de fondo blanco
-    background_color = (255, 255, 255)
+        # Calcula el tamaño de cada celda del grid
+        cell_width = 800 // j
+        cell_height = 600 // i
 
-    # Grosor del borde de las celdas
-    border_thickness = 2
+        # Crea una ventana de Pygame en el panel
+        screen = pygame.display.set_mode((800, 600))
 
-    # Bucle principal del juego
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+        # Color de fondo blanco
+        background_color = (255, 255, 255)
 
-        # Dibuja el fondo blanco
-        screen.fill(background_color)
+        # Grosor del borde de las celdas
+        border_thickness = 2
 
-        # Dibuja el grid con las imágenes escaladas
-        for row in range(i):
-            for col in range(j):
-                image = cargar_imagen(tablero[row][col], cell_width, cell_height)
-                screen.blit(image, (col * cell_width, row * cell_height))
-                # Dibuja el borde de la celda
-                pygame.draw.rect(screen, (0, 0, 0), (col * cell_width, row * cell_height, cell_width, cell_height), border_thickness)
+        # Bucle principal del juego
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
-        pygame.display.flip()
+            # Dibuja el fondo blanco
+            screen.fill(background_color)
 
-    pygame.quit()
+            # Dibuja el grid con las imágenes escaladas
+            for row in range(i):
+                for col in range(j):
+                    image = self.cargar_imagen(self.tablero[row][col], cell_width, cell_height)
+                    screen.blit(image, (col * cell_width, row * cell_height))
+                    # Dibuja el borde de la celda
+                    pygame.draw.rect(screen, (0, 0, 0), (col * cell_width, row * cell_height, cell_width, cell_height), border_thickness)
 
-    # Vuelve al panel principal después de que el juego termine
-    game_frame.pack_forget()
-    main_frame.pack()
+            pygame.display.flip()
+
+        pygame.quit()
+
+        # Vuelve al panel principal después de que el juego termine
+        game_frame.pack_forget()
+        main_frame.pack()
 
 
 
-# Creamos la ventana principal
-mainWindow = tk.Tk()
-mainWindow.geometry("800x600")
+    def start(self):
 
-# Creamos un frame principal
-main_frame = tk.Frame(mainWindow, width=800, height=600)
-main_frame.pack()
+        # Creamos la ventana principal
+        mainWindow = tk.Tk()
+        mainWindow.geometry("800x600")
 
-game_frame = tk.Frame(mainWindow, width=800, height=600)
+        # Creamos un frame principal
+        main_frame = tk.Frame(mainWindow, width=800, height=600)
+        main_frame.pack()
 
-gameLabel = tk.Label(main_frame, text="IA - PROYECT")
-gameLabel.config(font=("Courier", 18))
-gameLabel.pack()
+        game_frame = tk.Frame(mainWindow, width=800, height=600)
 
-# Botón de jugar
-playButton = tk.Button(main_frame, text="Jugar", foreground="green", width=20, height=5, command=iniciar_juego)
-exitButton = tk.Button(main_frame, text="Salir", foreground="red", width=20, height=5, command=quit)
+        gameLabel = tk.Label(main_frame, text="IA - PROYECT")
+        gameLabel.config(font=("Courier", 18))
+        gameLabel.pack()
 
-# Posición de botones en el panel principal
-playButton.pack()
-exitButton.pack()
+        # Botón de jugar
+        playButton = tk.Button(main_frame, text="Jugar", foreground="green", width=20, height=5, command=lambda: self.iniciar_juego(main_frame=main_frame, game_frame=game_frame))
+        exitButton = tk.Button(main_frame, text="Salir", foreground="red", width=20, height=5, command=quit)
 
-# Mostramos la ventana principal
-mainWindow.mainloop()
+        # Posición de botones en el panel principal
+        playButton.pack()
+        exitButton.pack()
+
+        # Mostramos la ventana principal
+        mainWindow.mainloop()
