@@ -57,9 +57,12 @@ class tablero:
         ruta = cur.AlgoritmoCURecursivo(self.tablero, self.posJugador, self.posMeta)
         rutata = ruta.costoUniformeRecursivo()
 
+        print(rutata)
         # Bucle principal del juego
         running = True
+        fps = 500
         while running:
+            fps = 450
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -94,14 +97,35 @@ class tablero:
                         pygame.quit()
                         break
                 if running != False:
-                    columna = paso[0][1]
-                    fila = paso[0][0]
-                    image = self.cargar_imagen(-1, cell_width, cell_height)
-                    screen.blit(image, ( columna * cell_width, fila * cell_height))
-                    # Dibuja el borde de la celda
-                    pygame.time.delay(450)
+
+                    if paso[1] == "vacio" or paso[1] =="meta":
+                        columna = paso[0][1]
+                        fila = paso[0][0]
+                        image = self.cargar_imagen(-1, cell_width, cell_height)
+                        screen.blit(image, ( columna * cell_width, fila * cell_height))
+                        # Dibuja el borde de la celda
+                        #clock.tick(5)
+                    elif paso[1] == "gato":
+                        columna = paso[0][1]
+                        fila = paso[0][0]
+                        image = self.cargar_imagen(8, cell_width, cell_height)
+                        screen.blit(image, ( columna * cell_width, fila * cell_height))
+                        # Dibuja el borde de la celda
+                        #clock.tick(5)
+                    
+                    elif paso[1] =="amo":
+
+                        fps -= 90
+                        columna = paso[0][1]
+                        fila = paso[0][0]
+                        image = self.cargar_imagen(9, cell_width, cell_height)
+                        screen.blit(image, ( columna * cell_width, fila * cell_height))
+                    
+
+                    
+                    pygame.time.delay(fps)
                     pygame.display.flip()
-                    #clock.tick(5)
+
                 
                 else:
                     break
