@@ -4,7 +4,7 @@ import os
 
 
 # Directorio de assets
-asset_dir = "src\\assets"
+asset_dir = os.path.join("src","assets")
 
 class tablero:
 
