@@ -1,6 +1,8 @@
 import tkinter as tk
 import pygame
 import os
+import Modelo.CostoUniformeRecursivo as cur
+import time
 
 
 # Directorio de assets
@@ -49,6 +51,10 @@ class tablero:
         # Grosor del borde de las celdas
         border_thickness = 2
 
+        #Ruta a seguir
+        ruta = cur.AlgoritmoCURecursivo(self.tablero, self.posJugador, self.posMeta)
+        rutata = ruta.costoUniformeRecursivo()
+
         # Bucle principal del juego
         running = True
         while running:
@@ -66,9 +72,28 @@ class tablero:
                     screen.blit(image, (col * cell_width, row * cell_height))
                     # Dibuja el borde de la celda
                     pygame.draw.rect(screen, (0, 0, 0), (col * cell_width, row * cell_height, cell_width, cell_height), border_thickness)
+            
+            image = self.cargar_imagen(4, cell_width, cell_height)
+            screen.blit(image, (self.posMeta[1] * cell_width, self.posMeta[0] * cell_height))
+            # Dibuja el borde de la celda
+            pygame.draw.rect(screen, (0, 0, 0), (self.posMeta[1] * cell_width, self.posMeta[0] * cell_height, cell_width, cell_height), border_thickness)
+
+            image = self.cargar_imagen(-1, cell_width, cell_height)
+            screen.blit(image, (self.posJugador[1] * cell_width, self.posJugador[0] * cell_height))
+            # Dibuja el borde de la celda
+            pygame.draw.rect(screen, (0, 0, 0), (self.posJugador[1] * cell_width, self.posJugador[0] * cell_height, cell_width, cell_height), border_thickness)
 
             pygame.display.flip()
 
+            for paso in rutata:
+                columna = paso[0][1]
+                fila = paso[0][0]
+                image = self.cargar_imagen(-1, cell_width, cell_height)
+                screen.blit(image, ( columna * cell_width, fila * cell_height))
+                # Dibuja el borde de la celda
+                pygame.time.delay(1000)
+                pygame.display.flip()
+                
         pygame.quit()
 
         # Vuelve al panel principal después de que el juego termine

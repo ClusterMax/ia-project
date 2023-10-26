@@ -16,15 +16,15 @@ tablero = [[1,1,3,1,1,1,1,1],
 
 # matriz para graficar
 tablero2 = [[1, 1, 3, 1, 1, 1, 1, 1],
-           [1, 2, 0, 0, 2, 0, 0, 1],
-           [4, 0, 1, 1, 1, 0, 0, -1],
+           [1, -2, 0, 0, -2, 0, 0, 1],
+           [1, 0, 1, 1, 1, 0, 0, 1],
            [1, 0, 1, 0, 0, 0, 1, 1],
-           [1, 2, 1, 3, 1, 1, 1, 1]]
+           [1, -2, 1, 3, 1, 1, 1, 1]]
 
 
-algoritmo = cur.AlgoritmoCURecursivo(tablero=tablero, puntoInicial = [2,7], puntoFinal = [2,0])
+#algoritmo = cur.AlgoritmoCURecursivo(tablero=tablero, puntoInicial = [2,7], puntoFinal = [2,0])
 
-print(algoritmo.costoUniformeRecursivo())
+#print(algoritmo.costoUniformeRecursivo())
 
 
 obj = GUI.tablero(tablero2)
