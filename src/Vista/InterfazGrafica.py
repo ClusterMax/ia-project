@@ -8,6 +8,8 @@ import time
 # Directorio de assets
 asset_dir = os.path.join("src","assets")
 
+clock = pygame.time.Clock()
+
 class tablero:
 
     def __init__(self, tablero, posJugador=[2,7], posMeta=[2,0]):
@@ -86,15 +88,25 @@ class tablero:
             pygame.display.flip()
 
             for paso in rutata:
-                columna = paso[0][1]
-                fila = paso[0][0]
-                image = self.cargar_imagen(-1, cell_width, cell_height)
-                screen.blit(image, ( columna * cell_width, fila * cell_height))
-                # Dibuja el borde de la celda
-                pygame.time.delay(1000)
-                pygame.display.flip()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                        pygame.quit()
+                        break
+                if running != False:
+                    columna = paso[0][1]
+                    fila = paso[0][0]
+                    image = self.cargar_imagen(-1, cell_width, cell_height)
+                    screen.blit(image, ( columna * cell_width, fila * cell_height))
+                    # Dibuja el borde de la celda
+                    pygame.time.delay(450)
+                    pygame.display.flip()
+                    #clock.tick(5)
                 
-        pygame.quit()
+                else:
+                    break
+                
+        #pygame.quit()
 
         # Vuelve al panel principal después de que el juego termine
         game_frame.pack_forget()
