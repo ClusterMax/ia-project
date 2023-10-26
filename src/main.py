@@ -7,15 +7,9 @@ import Vista.InterfazGrafica as GUI
 
 #para instalar todas las librerias trabajadas del entorno se debe de escribir dentro del entorno pip install -r requiriments.txt
 
-tablero = [[1,1,3,1,1,1,1,1],
-           [1,-2,0,0,-2,0,0,1],
-           [1,0,1,1,1,0,0,1], 
-           [1,0,1,0,0,0,1,1],
-           [1,-2,1,3,1,1,1,1]]
-
 
 # matriz para graficar
-tablero2 = [[1, 1, 3, 1, 1, 1, 1, 1],
+tablero = [[1, 1, 3, 1, 1, 1, 1, 1],
            [1, -2, 0, 0, -2, 0, 0, 1],
            [1, 0, 1, 1, 1, 0, 0, 1],
            [1, 0, 1, 0, 0, 0, 1, 1],
@@ -27,6 +21,6 @@ tablero2 = [[1, 1, 3, 1, 1, 1, 1, 1],
 #print(algoritmo.costoUniformeRecursivo())
 
 
-obj = GUI.tablero(tablero2)
+obj = GUI.tablero(tablero)
 
 obj.start()
