@@ -35,7 +35,7 @@ class Arbol:
         else:
             return self.coordenadas == other.coordenadas and self.padre == other.padre and self.ValorAcumulado == other.valorAcumulado
     
-    #Metodo del operador > par apoder comprarar objetos de la misma clase
+    #Metodo del operador > par apoder comprarar objetos de esta clase
     def __gt__(self, other):
 
         if self.valorHijoMenorAcumulado == 0 and other.valorHijoMenorAcumulado == 0:
@@ -47,7 +47,7 @@ class Arbol:
         elif self.valorHijoMenorAcumulado != 0 and other.valorHijoMenorAcumulado == 0:
             return self.valorHijoMenorAcumulado > other.ValorAcumulado
     
-    #Metodo del operador >= par apoder comprarar objetos de la misma clase
+    #Metodo del operador >= par apoder comprarar objetos de esta clase
     def __ge__(self, other):
         if self.valorHijoMenorAcumulado == 0 and other.valorHijoMenorAcumulado == 0:
             return self.ValorAcumulado >= other.ValorAcumulado
@@ -58,7 +58,7 @@ class Arbol:
         elif self.valorHijoMenorAcumulado != 0 and other.valorHijoMenorAcumulado == 0:
             return self.valorHijoMenorAcumulado >= other.ValorAcumulado
 
-    #Metodo del operador < par apoder comprarar objetos de la misma clase
+    #Metodo del operador < par apoder comprarar objetos de esta clase
     def __lt__(self, other):
         if self.valorHijoMenorAcumulado == 0 and other.valorHijoMenorAcumulado == 0:
             return self.ValorAcumulado < other.ValorAcumulado
@@ -69,7 +69,7 @@ class Arbol:
         elif self.valorHijoMenorAcumulado != 0 and other.valorHijoMenorAcumulado == 0:
             return self.valorHijoMenorAcumulado < other.ValorAcumulado
 
-    #Metodo del operador <= par apoder comprarar objetos de la misma clase
+    #Metodo del operador <= par apoder comprarar objetos de esta clase
     def __le__(self, other):
         if self.valorHijoMenorAcumulado == 0 and other.valorHijoAcumulado == 0:
             return self.ValorAcumulado <= other.ValorAcumulado

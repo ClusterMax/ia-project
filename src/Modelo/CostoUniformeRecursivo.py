@@ -35,8 +35,7 @@ class AlgoritmoCURecursivo:
             ##Expandimos el nodo de arriba
             ##Si esta en los limites de arriba
             if posicion[0] != 0:#como el siguiente nodo  esta en el limite del tablero arriba
-                # no lo podemos crear, por ende tenemos que añadirlo a la lista y decir que tiene un valor de infinito positivo
-                #print("calcula el de arriba")
+                # no lo podemos crear
                 posicionSiguiente = [posicion[0]-1, posicion[1]]
 
                 if nodoActual.get_padre() is None or nodoActual.get_padre().get_coordenadas() != posicionSiguiente:
@@ -78,6 +77,7 @@ class AlgoritmoCURecursivo:
                         nodosExtendidosPorNodo.append(nodoActual.get_hijoRight())
                         nodosExtendidosGlobal.append(nodoActual.get_hijoRight())
             
+            #si esta en los limites de abajo
             if posicion[0] != len(self.tablero)-1: #se encuenta en el limite de abajo
                     
                     #print("calcula abajo")
@@ -99,6 +99,7 @@ class AlgoritmoCURecursivo:
                             nodosExtendidosPorNodo.append(nodoActual.get_hijoBottom())
                             nodosExtendidosGlobal.append(nodoActual.get_hijoBottom())
             
+            #si esta en los limites de la izquierda
             if posicion[1] != 0: #se encuenta en el limite de la izquierda
 
                     #print("calcula el de izquierda")
