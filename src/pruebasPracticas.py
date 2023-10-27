@@ -74,7 +74,7 @@ obj2 = GUI.tablero(tablero=game_board, posJugador=[4,0], posMeta=[1,5])
 obj2.start()
 
 
-#PRUEBA 6 ESCENARIO DIFERENTE MAS MUROS  
+#PRUEBA 6 SEGUNDO TABLERO MAS MUROS  
 
 game_board = [[1, 0, 0, 0, 0, 0, 1, -2],
               [3, 1, 1, 1, 0, 1, 0, 0],
