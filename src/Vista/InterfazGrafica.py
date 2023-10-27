@@ -2,7 +2,6 @@ import tkinter as tk
 import pygame
 import os
 import Modelo.CostoUniformeRecursivo as cur
-import time
 
 
 # Directorio de assets
@@ -23,6 +22,14 @@ class tablero:
     def cargar_imagen(self, codigo, cell_width, cell_height):
         image = pygame.image.load(os.path.join(asset_dir, f"{codigo}.png"))
         return pygame.transform.scale(image, (cell_width, cell_height))
+    
+
+    def muestra_texto(self, pantalla,fuente,texto,color, dimensiones, x, y):
+        tipo_letra = pygame.font.Font(fuente,dimensiones)
+        superficie = tipo_letra.render(texto,True, color)
+        rectangulo = superficie.get_rect()
+        rectangulo.center = (x, y)
+        pantalla.blit(superficie,rectangulo)
 
     # Función que se ejecuta cuando se hace clic en el botón "Jugar"
     # Función que se ejecuta cuando se hace clic en el botón "Jugar"
@@ -90,7 +97,14 @@ class tablero:
 
             pygame.display.flip()
 
+            consolas = pygame.font.match_font('consolas')
+
+
             for paso in rutata:
+
+
+
+
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         running = False
